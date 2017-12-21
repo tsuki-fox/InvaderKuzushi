@@ -95,11 +95,13 @@ public class TextInjector : MonoBehaviour
 
 	void TextAplly()
 	{
+		/*
 		if(!StringUtil.CheckValidFormat(_format))
 		{
 			_uiText.text = "[Invalid Format]";
 			return;
 		}
+		*/
 
 		List<object> valueArgs = new List<object>();
 		foreach (var arg in _arguments.Select((v, i) => new { v, i }))
@@ -152,12 +154,14 @@ public class TextInjector : MonoBehaviour
 			EditorGUILayout.LabelField("Text");
 			var text = EditorGUILayout.TextArea(self._format, GUILayout.Height(80));
 
+			/*
 			if (!StringUtil.CheckValidFormat(self._format))
 			{
 				MyGUIUtil.BeginContentColorChange(Color.red);
 				EditorGUILayout.LabelField("[Invalid format]");
 				MyGUIUtil.EndContentColorChange();
 			}
+			*/
 
 			EditorGUILayout.LabelField("Arguments");
 

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using System.Linq;
+using UniRx;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -141,10 +143,10 @@ namespace TF
 				_reserved[prefab.name].Add(obj);
 			}
 		}
-		/// <summary>インスタンスを借りる(Borrow)</summary>
-		/// <param name="prefab">借りたいインスタンスの元プレハブ</param>
+		/// <summary>インスタンスを再割当てする</summary>
+		/// <param name="prefab">再割当てしたいインスタンスの元プレハブ</param>
 		/// <returns>インスタンス</returns>
-		public static GameObject Borrow(GameObject prefab)
+		public static GameObject Alloc(GameObject prefab)
 		{
 			CheckInitialize();
 			if (!_reserved.ContainsKey(prefab.name))
@@ -159,26 +161,35 @@ namespace TF
 				if (!item.activeSelf)
 				{
 					item.SetActive(true);
-					item.BroadcastMessage("OnBorrow", SendMessageOptions.DontRequireReceiver);
+					item.BroadcastMessage("OnAlloc", SendMessageOptions.DontRequireReceiver);
 					return item;
 				}
 			}
 
 			//全て使用中ならば新たに確保する
 			Reserve(prefab, 1);
-			return Borrow(prefab);
+			return Alloc(prefab);
 		}
-		/// <summary>インスタンスを返済する</summary>
-		/// <param name="instance">返済するインスタンス</param>
-		public static void Repay(GameObject instance)
+		/// <summary>インスタンスを解放する</summary>
+		/// <param name="instance">解放するインスタンス</param>
+		public static void Free(GameObject instance)
 		{
-			if (_poolRoot.IsChild(instance))
-				Debug.LogWarningFormat("{0} isn't child of [ObjectPool]", instance.name);
+			if (!instance.transform.IsChildOf(_poolRoot.transform))
+			{
+				Debug.LogWarningFormat("{0} isn't child of [ObjectPool]. Used [GameObject.Destroy] instead.", instance.name);
+				instance.BroadcastMessage("OnFree", SendMessageOptions.DontRequireReceiver);
+				Destroy(instance);
+			}
 			else
 			{
-				instance.BroadcastMessage("OnRepay", SendMessageOptions.DontRequireReceiver);
+				instance.BroadcastMessage("OnFree", SendMessageOptions.DontRequireReceiver);
 				instance.SetActive(false);
 			}
+		}
+
+		public static void Free(GameObject instance,float delaySec)
+		{
+			Observable.Timer(TimeSpan.FromSeconds(delaySec)).Subscribe(_ => Free(instance));
 		}
 
 		//! --------instances--------
@@ -251,5 +262,16 @@ namespace TF
 			}
 		}
 #endif
+
+		//! --------old--------
+		[System.Obsolete("代わりにReallocationを使用してください,コールバックはOnReallocationが呼ばれます")]
+		public static GameObject Borrow(GameObject prefab)
+		{
+			return null;
+		}
+		[System.Obsolete("代わりにFreeを使用してください,コールバックはOnFreeが呼ばれます")]
+		public static void Repay(GameObject instance)
+		{
+		}
 	}
 }

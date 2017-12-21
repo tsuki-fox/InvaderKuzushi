@@ -26,22 +26,8 @@ public static class GameObjectEx
 		return (TagName)Enum.Parse(typeof(TagName), self.tag);
 	}
 
-	public static bool HasComponent<T>(this GameObject self)where T:Component
+	public static bool HasComponent<T>(this GameObject self) where T : Component
 	{
 		return self.GetComponent<T>() != null;
-	}
-
-	public static bool IsChild(this GameObject self,GameObject obj)
-	{
-		var current = obj.transform;
-		while(current!=self)
-		{
-			if (current.parent == null)
-				return false;
-			current = current.parent;
-			if (current == self)
-				return true;
-		}
-		return false;
 	}
 }

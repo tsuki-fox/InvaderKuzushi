@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 [AddComponentMenu("Generals/Killable")]
 public class Killable : MonoBehaviour
@@ -43,6 +44,22 @@ public class Killable : MonoBehaviour
 		_health = _maxHealth;	
 	}
 
+	void OnAlloc()
+	{
+		_health = _maxHealth;
+	}
+
+	void OnFree()
+	{
+		Observable
+			.NextFrame()
+			.Subscribe(_ =>
+			{
+			//	onDamage = System.Delegate.RemoveAll(onDamage, onDamage);
+			})
+			.AddTo(gameObject);
+	}
+
 	/// <summary>ダメージを受ける</summary>
 	/// <param name="value">受ける量 : value>0 </param>
 	public void TakeDamage(float value)
@@ -60,7 +77,7 @@ public class Killable : MonoBehaviour
 			else
 			{
 				if (_objectPoolSupport)
-					TF.ObjectPool.Repay(gameObject);
+					TF.ObjectPool.Free(gameObject);
 				else
 					Destroy(gameObject);
 			}

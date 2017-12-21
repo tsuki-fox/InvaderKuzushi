@@ -7,4 +7,8 @@
 	MainCamera,
 	Player,
 	GameController,
+	Enemy,
+	Ball,
+	Wall,
+	PlayerBullet,
 }

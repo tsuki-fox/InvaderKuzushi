@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212113085105349518}
   - component: {fileID: 95138106927061444}
   - component: {fileID: 61168484325351406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,9 +38,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4510837921617044}
   - component: {fileID: 50892561292317402}
-  m_Layer: 0
+  - component: {fileID: 114850921341854134}
+  - component: {fileID: 114703898645197196}
+  m_Layer: 10
   m_Name: InvaderB
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +136,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114703898645197196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b7bf1384889c2f4a88b0d8f46b7890e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enter: 08000000
+  _stay: 
+  _exit: 
+  _freeNotifiable: 1
+--- !u!114 &114850921341854134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5148082e07dea943b11e09410254100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 10
+  _straddleEnabled: 0
+  _objectPoolSupport: 1
 --- !u!212 &212113085105349518
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -169,7 +200,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c5bbb615c7376424f900dfb772e5f2d8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.54482746, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
