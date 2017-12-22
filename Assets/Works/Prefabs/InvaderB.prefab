@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50892561292317402}
   - component: {fileID: 114850921341854134}
   - component: {fileID: 114703898645197196}
+  - component: {fileID: 114587894828910186}
   m_Layer: 10
   m_Name: InvaderB
   m_TagString: Enemy
@@ -136,6 +137,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114587894828910186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca281602453aaa14c935d48427f7e3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveTick: 0.2
+  _moveStepX: 0.2
+  _moveStepY: -0.2
 --- !u!114 &114703898645197196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,7 +215,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c5bbb615c7376424f900dfb772e5f2d8, type: 3}
-  m_Color: {r: 0, g: 0.54482746, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.9172416, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

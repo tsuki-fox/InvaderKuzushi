@@ -170,6 +170,7 @@ namespace TF
 			Reserve(prefab, 1);
 			return Alloc(prefab);
 		}
+
 		/// <summary>インスタンスを解放する</summary>
 		/// <param name="instance">解放するインスタンス</param>
 		public static void Free(GameObject instance)

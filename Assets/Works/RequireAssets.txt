@@ -1,0 +1,7 @@
+SciFi Music Pack 1.0
+Retro Noisy Explosion Sound Pack Lite 1.0
+Retro SFX Pack 1.1
+Particle System Preview
+Post Processing Stack
+UniRx
+DOTween

@@ -11,4 +11,5 @@
 	Ball,
 	Wall,
 	PlayerBullet,
+	LaserFence,
 }

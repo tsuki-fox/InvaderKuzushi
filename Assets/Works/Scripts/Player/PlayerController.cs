@@ -28,9 +28,12 @@ public class PlayerController : MonoBehaviour
 
 	void Shot()
 	{
-		var bullet = TF.ObjectPool.Alloc(_sourceBullet);
-		bullet.transform.position = transform.position;
-		bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, _shotVelocity);
+		if (MyInput.downShot)
+		{
+			var bullet = TF.ObjectPool.Alloc(_sourceBullet);
+			bullet.transform.position = transform.position;
+			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, _shotVelocity);
+		}
 	}
 
 	void Awake()
@@ -41,8 +44,6 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 		Move();
-
-		if (MyInput.downShot)
-			Shot();
+		Shot();
 	}
 }

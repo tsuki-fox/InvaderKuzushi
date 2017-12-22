@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0c39822a1889c9d409b5c5603f52fb88
+timeCreated: 1513909454
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cubos
+  fontNames:
+  - Cubos
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

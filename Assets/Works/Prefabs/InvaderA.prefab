@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50289564172358106}
   - component: {fileID: 114076073528417700}
   - component: {fileID: 114199726491420730}
+  - component: {fileID: 114203294850341018}
   m_Layer: 10
   m_Name: InvaderA
   m_TagString: Enemy
@@ -165,6 +166,20 @@ MonoBehaviour:
   _stay: 
   _exit: 
   _freeNotifiable: 1
+--- !u!114 &114203294850341018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528469906346418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca281602453aaa14c935d48427f7e3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveTick: 0.2
+  _moveStepX: 0.2
+  _moveStepY: -0.2
 --- !u!212 &212291483538323396
 SpriteRenderer:
   m_ObjectHideFlags: 1
