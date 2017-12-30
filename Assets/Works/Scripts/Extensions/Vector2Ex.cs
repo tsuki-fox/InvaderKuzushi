@@ -12,4 +12,9 @@ public static class Vector2Ex
 	{
 		return new Vector3(self.x, self.y, z);
 	}
+
+	public static float ToAngle(this Vector2 self)
+	{
+		return Mathf.Atan2(self.y, self.x) * Mathf.Rad2Deg;
+	}
 }

@@ -8,15 +8,25 @@ using UnityEditor;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BallController : MonoBehaviour
 {
-	Rigidbody2D _rigidbody;
-
+	//! --------parameters--------
 	[SerializeField]
 	float _speed;
-
 	[SerializeField]
 	float _speedLimitMin;
 	[SerializeField]
 	float _speedLimitMax;
+	[SerializeField]
+	Vector2 _power;
+
+	//! --------internal variables--------
+	Rigidbody2D _rigidbody;
+
+	//! --------functions--------
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.GetEnumTagName() == TagName.LaserFence)
+			BallActivityBus.NotifyDrop(gameObject);
+	}
 
 	void VelocityControl()
 	{
@@ -29,8 +39,6 @@ public class BallController : MonoBehaviour
 			_rigidbody.velocity = _speedLimitMin * dir;
 	}
 
-	[SerializeField]
-	Vector2 _power;
 	void Boost()
 	{
 		_rigidbody.velocity = _power;

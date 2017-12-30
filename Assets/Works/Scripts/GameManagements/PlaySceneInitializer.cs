@@ -17,6 +17,11 @@ public class PlaySceneInitializer : MonoBehaviour
 
 	void Start()
 	{
+		GameActivityBus.onGameOver += () =>
+		{
+			Debug.Log("GameOver!");
+		};
+
 		_audioSource.clip = _mainBGM;
 		_audioSource.Play();	
 	}

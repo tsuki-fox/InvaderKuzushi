@@ -78,12 +78,12 @@ public class EnemyEmitter : MonoBehaviour
 			cnt++;
 		}
 
-		Debug.LogFormat("emitted {0} enemies", cnt);
+		//Debug.LogFormat("emitted {0} enemies", cnt);
 
 		//全てエミットされたらロック解除
 		Observable.Timer(TimeSpan.FromSeconds(formation.infos.Count * _delay + _delay)).Subscribe(_ =>
 			{
-				Debug.Log("unlocked");
+//				Debug.Log("unlocked");
 				foreach (var stepper in steppers)
 					stepper.locked = false;
 			}).AddTo(gameObject);
