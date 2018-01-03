@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Cores;
 
 namespace Assets.Players
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[RequireComponent(typeof(PlayerCore))]
-	public abstract class BasePlayerComponent : MonoBehaviour
+	public abstract class BasePlayerComponent : BaseComponent
 	{
 		//! --------internal variables--------
 		Rigidbody2D _rigidbody2d;
@@ -22,7 +23,7 @@ namespace Assets.Players
 		protected PlayerMissileController missileController { get { return _missileController; } }
 		protected PlayerFireController fireController { get { return _fireController; } }
 
-		//! --------Scripting Runtimes--------
+		//! --------life cycles--------
 		void Awake()
 		{
 			_rigidbody2d = GetComponent<Rigidbody2D>();

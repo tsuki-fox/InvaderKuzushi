@@ -12,6 +12,11 @@ namespace Assets.Players
 		[SerializeField]
 		AudioClip _missileSE;
 
+		//! ----functions----
+		public override void Clean()
+		{
+		}
+
 		//! --------life cycles--------
 		void Start()
 		{

@@ -10,6 +10,11 @@ namespace Assets.PlayerBullets
 		[SerializeField]
 		AudioClip _hitSE;
 
+		//! ----functions----
+		public override void Clean()
+		{
+		}
+
 		//! ----life cycles----
 		void Start()
 		{

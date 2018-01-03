@@ -11,13 +11,11 @@ namespace Assets.Enemies
 		[SerializeField]
 		GameObject _deadVFX;
 
-		//! ----life cycles----
-		void Start()
+		//! ----overrides----
+		public override void Initialize()
 		{
-			core.onInitialized += () =>
-			{
-				core.onDead += Core_onDead;
-			};
+			base.Initialize();
+			core.onDead += Core_onDead;
 		}
 
 		private void Core_onDead()

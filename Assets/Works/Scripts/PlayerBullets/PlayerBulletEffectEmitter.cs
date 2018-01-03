@@ -11,6 +11,8 @@ namespace Assets.PlayerBullets
 		[SerializeField]
 		GameObject _attackedVFX;
 
+		//! ----functions----
+
 		//! ----life cycles----
 		void Start()
 		{

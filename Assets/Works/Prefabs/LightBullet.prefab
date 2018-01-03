@@ -39,9 +39,7 @@ GameObject:
   - component: {fileID: 4939341104758126}
   - component: {fileID: 50753691124981008}
   - component: {fileID: 114275526117473402}
-  - component: {fileID: 114405705737209962}
-  - component: {fileID: 114011938834627402}
-  - component: {fileID: 114423242762287874}
+  - component: {fileID: 114247530914438144}
   m_Layer: 11
   m_Name: LightBullet
   m_TagString: PlayerBullet
@@ -138,7 +136,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114011938834627402
+--- !u!114 &114247530914438144
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -146,11 +144,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732701203176000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b525e7b0b41c6e34abd87dcdfe6fa4ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ec856ec51b0c7a41a52144597624594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackedVFX: {fileID: 1668397389729180, guid: dab581607804ae24e9ab886ff256b024,
-    type: 2}
 --- !u!114 &114275526117473402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,30 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5cacae6e58547c41b5eef11ccb29c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114405705737209962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732701203176000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fe1fd01a58d80439e1d2d0c4a137f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _damage: 5
---- !u!114 &114423242762287874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732701203176000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9c4fcabd0b2ed438e0f13a690e6d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hitSE: {fileID: 8300000, guid: a8ea8fe2018b1274f90dca732e79f4c8, type: 3}
 --- !u!212 &212704173770311754
 SpriteRenderer:
   m_ObjectHideFlags: 1

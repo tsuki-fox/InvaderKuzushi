@@ -31,14 +31,11 @@ namespace Assets.PlayerBullets
 			core.Kill();
 		}
 
-		//! ----life cycles----
-		void Start()
+		//! ----functions----
+		public override void Clean()
 		{
-			core.onCleaned += () =>
-			{
-				onAttacked = delegate { };
-				onHitted = delegate { };
-			};
+		//	onAttacked = delegate { };
+		//	onHitted = delegate { };
 		}
 	}
 }

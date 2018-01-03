@@ -12,4 +12,5 @@
 	Wall,
 	PlayerBullet,
 	LaserFence,
+	PlayerMissile,
 }

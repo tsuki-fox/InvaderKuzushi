@@ -1,49 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Core;
+using Assets.Cores;
 using Assets.Damages;
 using TF;
 
 namespace Assets.PlayerBullets
 {
-	public class PlayerBulletCore : MonoBehaviour, ICore, IKillable
+	public class PlayerBulletCore : BaseCore, IKillable
 	{
 		//! ----parameters----
+		[SerializeField]
+		float _damage;
+
+		//! ----properties----
+		public float damage { get { return _damage; } }
+
 		//! ----events----
-		public event OnCleanedHandler onCleaned = delegate { };
-		public event OnInitializedHandler onInitialized = delegate { };
-		public event OnReleasedHandler onReleased = delegate { };
 		public event OnKilledHandler onKilled = delegate { };
 
 		//! ----functions----
-		public void Clean()
+		public override void Clean()
 		{
 			onKilled = delegate { };
-			onCleaned();
-		}
-
-		public void Initialize()
-		{
-			Clean();
-			onInitialized();
 		}
 
 		public void Kill()
 		{
-			onKilled();
+			if(onKilled!=null)
+				onKilled();
 			ObjectPool.Free(gameObject);
 		}
 
-		//! ----object pool----
-		void OnAlloc()
+		public override void Initialize()
 		{
-			Initialize();
-		}
-
-		void OnFree()
-		{
-			onReleased();
+			base.Initialize();
+			Debug.Log("bullet initialized");
 		}
 	}
 }

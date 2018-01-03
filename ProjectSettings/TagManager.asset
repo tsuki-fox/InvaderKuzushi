@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - PlayerBullet
   - LaserFence
+  - PlayerMissile
   layers:
   - Default
   - TransparentFX

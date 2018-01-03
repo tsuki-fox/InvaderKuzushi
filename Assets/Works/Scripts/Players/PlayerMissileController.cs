@@ -74,22 +74,23 @@ namespace Assets.Players
 			}
 		}
 
-		//! --------life cycles--------
-		void Start()
+		public override void Clean()
 		{
-			core.onInitialized += () =>
-			{
-				_powerLevel = 0;
-			};
-			core.onCleaned += () =>
-			{
-				onPowerChanged = delegate { };
-				onPowerDowned = delegate { };
-				onPowerUpped = delegate { };
-				onShot = delegate { };
-			};
+			base.Clean();
+			onPowerChanged = delegate { };
+			onPowerDowned = delegate { };
+			onPowerUpped = delegate { };
+			onShot = delegate { };
+			_powerLevel = 0;
 		}
 
+		public override void Initialize()
+		{
+			base.Initialize();
+			_powerLevel = 0;
+		}
+
+		//! --------life cycles--------
 		void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))

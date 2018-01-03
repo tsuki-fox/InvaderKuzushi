@@ -1,63 +1,76 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace Assets.Players
+namespace Assets.Cores
 {
-	public class PlayerLogger : BasePlayerComponent
+	public class Logger : MonoBehaviour
 	{
+		//! ----type declares----
+		public class Message
+		{
+			public Color color;
+			public string text;
+			public Message(Color color,string text)
+			{
+				this.color = color;
+				this.text = text;
+			}
+		}
+
 		//! --------parameters--------
 
 		//! --------internal variables--------
-		List<string> _logs = new List<string>();
+		List<Message> _logs = new List<Message>();
 		long _frameCount = 0;
 
 		//! --------functions--------
-		void Log(string text)
+		public void Log(string text)
 		{
 			var frameText = string.Format("[{0:0000}F]:", _frameCount);
-			_logs.Insert(0, frameText + text);
+			var message = new Message(Color.white, frameText + text);
+
+			DOTween.To(
+			getter: () => message.color,
+			setter: color => message.color = color,
+			endValue: Color.grey,
+			duration: 1f);
+
+			_logs.Insert(0, message);
 		}
-		void Log(string format, params object[] args)
+		public void Log(string format, params object[] args)
 		{
 			var text = string.Format(format, args);
 			var frameText = string.Format("[{0:0000}F]:", _frameCount);
-			_logs.Insert(0, frameText + text);
+			var message = new Message(Color.white, frameText + text);
+
+			DOTween.To(
+			getter: () => message.color,
+			setter: color => message.color = color,
+			endValue: Color.grey,
+			duration: 1f);
+
+			_logs.Insert(0, message);
 		}
 
 		//! --------life cycles--------
-		void Start()
-		{
-			core.onInitialized += () =>
-			{
-				Log("Initialized");
-				fireController.onShot += () =>
-				 {
-					 Log("Shot");
-				 };
-			};
-			core.onReleased += () =>
-			{
-				Log("Released");
-			};
-		}
-
 		void FixedUpdate()
 		{
 			_frameCount++;
 		}
 
-		public override void Clean()
+		public void Clean()
 		{
 			_frameCount = 0;
-			_logs = new List<string>();
+			_logs = new List<Message>();
 		}
 
 #if UNITY_EDITOR
-		[CustomEditor(typeof(PlayerLogger))]
+		[CustomEditor(typeof(Logger))]
 		[CanEditMultipleObjects]
 		public class PlayerLoggerInspector : Editor
 		{
@@ -75,7 +88,7 @@ namespace Assets.Players
 
 			public override void OnInspectorGUI()
 			{
-				var self = target as PlayerLogger;
+				var self = target as Logger;
 				bool flip = true;
 
 				_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
@@ -83,11 +96,10 @@ namespace Assets.Players
 				foreach (var log in self._logs)
 				{
 					var rect = EditorGUILayout.BeginHorizontal();
-					Color color = Color.white;
+					Color color = log.color;
 					EditorGUI.DrawRect(rect, color);
-					EditorGUILayout.LabelField(log);
+					EditorGUILayout.LabelField(log.text);
 					EditorGUILayout.EndHorizontal();
-
 					flip = !flip;
 				}
 

@@ -36,9 +36,10 @@ namespace Assets.Enemies
 			}
 		}
 
-		//! ----life cycles----
-		void Start()
+		//! ----overrides----
+		public override void Initialize()
 		{
+			base.Initialize();
 			core.onInitialized += () =>
 			{
 				_collider = GetComponentInChildren<BoxCollider2D>();

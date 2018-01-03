@@ -17,7 +17,7 @@ namespace Assets.Players
 		public delegate void OnShotHandler();
 
 		//! --------events-------
-		public OnShotHandler onShot = delegate { };
+		public event OnShotHandler onShot = delegate { };
 
 		//! --------functions--------
 		void TryShot()
@@ -26,22 +26,20 @@ namespace Assets.Players
 			{
 				var bullet = ObjectPool.Alloc(_bulletSource);
 				bullet.transform.position = transform.position;
-
+				var bulletCore = bullet.GetComponent<PlayerBullets.PlayerBulletCore>();
 				var bulletBody = bullet.GetComponent<Rigidbody2D>();
 				bulletBody.velocity = new Vector2(0f, _shotVelocity);
 				onShot();
 			}
 		}
 
-		//! --------life cycles--------
-		void Start()
+		public override void Clean()
 		{
-			core.onCleaned += () =>
-			{
-				onShot = delegate { };
-			};
+			base.Clean();
+			onShot = delegate { };
 		}
 
+		//! --------life cycles--------
 		void Update()
 		{
 			TryShot();

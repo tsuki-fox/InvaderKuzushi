@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Damages;
-using Assets.Core;
+using Assets.Cores;
 using UniRx;
 using TF;
 
 namespace Assets.Enemies
 {
-	public class EnemyCore : MonoBehaviour, IDamageable, IKillable, ICore
+	public class EnemyCore : BaseCore,IDamageable
 	{
 		//! ----parameters----
 		[SerializeField]
@@ -23,9 +23,6 @@ namespace Assets.Enemies
 		public event OnDamagedHandler onDamaged = delegate { };
 		public event OnKilledHandler onKilled = delegate { };
 		public event OnDeadHandler onDead = delegate { };
-		public event OnCleanedHandler onCleaned = delegate { };
-		public event OnInitializedHandler onInitialized = delegate { };
-		public event OnReleasedHandler onReleased = delegate { };
 
 		//! ----properties----
 		public float maxHP { get { return _maxHP; } }
@@ -48,39 +45,18 @@ namespace Assets.Enemies
 			onKilled();
 		}
 
-		public void Clean()
+		public override void Clean()
 		{
+			base.Clean();
 			onDamaged = delegate { };
 			onKilled = delegate { };
 			onDead = delegate { };
-			onCleaned();
 		}
 
-		public void Initialize()
+		public override void Initialize()
 		{
-			Clean();
+			base.Initialize();
 			_hp = _maxHP;
-			onInitialized();
-		}
-
-		//! ----life cycles----
-		void Start()
-		{
-			Observable.NextFrame().Subscribe(_ =>
-			{
-				Initialize();
-			});
-		}
-
-		//! ----object pool support----
-		void OnAlloc()
-		{
-			Initialize();
-		}
-
-		void OnFree()
-		{
-			onReleased();
 		}
 	}
 }

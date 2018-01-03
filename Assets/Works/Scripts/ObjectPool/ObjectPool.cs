@@ -171,6 +171,20 @@ namespace TF
 			return Alloc(prefab);
 		}
 
+		public static GameObject Alloc(GameObject prefab,float lifeTime)
+		{
+			var obj = Alloc(prefab);
+			Free(obj, lifeTime);
+			return obj;
+		}
+		public static GameObject Alloc(GameObject prefab,float lifeTime,Vector2 position)
+		{
+			var obj = Alloc(prefab);
+			Free(obj, lifeTime);
+			obj.transform.position = position;
+			return obj;
+		}
+
 		/// <summary>インスタンスを解放する</summary>
 		/// <param name="instance">解放するインスタンス</param>
 		public static void Free(GameObject instance)
