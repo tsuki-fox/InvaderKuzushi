@@ -11,26 +11,24 @@ namespace Assets.Players
 		AudioClip _fireSE;
 		[SerializeField]
 		AudioClip _missileSE;
+		[SerializeField]
+		AudioClip _deadSE;
 
 		//! ----functions----
-		public override void Clean()
+		public override void Initialize()
 		{
-		}
-
-		//! --------life cycles--------
-		void Start()
-		{
-			core.onInitialized += () =>
+			base.Initialize();
+			fireController.onShot += () =>
 			{
-				fireController.onShot += () =>
-				{
-					GlobalAudioSource.PlayOneShot(_fireSE);
-				};
-
-				missileController.onShot += () =>
-				{
-					GlobalAudioSource.PlayOneShot(_missileSE);
-				};
+				GlobalAudioSource.PlayOneShot(_fireSE);
+			};
+			missileController.onShot += () =>
+			{
+				GlobalAudioSource.PlayOneShot(_missileSE);
+			};
+			core.onDead += () =>
+			{
+				GlobalAudioSource.PlayOneShot(_deadSE);
 			};
 		}
 	}

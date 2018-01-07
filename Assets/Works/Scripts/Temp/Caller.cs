@@ -8,11 +8,20 @@ public static class Caller
 {
 	public delegate void Handler();
 
-	public static void Timer(float dueSeconds, Handler handler, GameObject addFrom = null)
+	public static IDisposable Timer(float dueSeconds, Handler handler, GameObject addFrom = null)
 	{
 		if (!addFrom)
-			Observable.Timer(TimeSpan.FromSeconds(dueSeconds)).Subscribe(_ => handler());
+			return Observable.Timer(TimeSpan.FromSeconds(dueSeconds)).Subscribe(_ => handler());
 		else
-			Observable.Timer(TimeSpan.FromSeconds(dueSeconds)).Subscribe(_ => handler()).AddTo(addFrom);
+			return Observable.Timer(TimeSpan.FromSeconds(dueSeconds)).Subscribe(_ => handler()).AddTo(addFrom);
+	}
+
+	public static IObservable<long> Timer(float due)
+	{
+		return Observable.Timer(TimeSpan.FromSeconds(due));
+	}
+	public static IObservable<long> Interval(float due)
+	{
+		return Observable.Interval(TimeSpan.FromSeconds(due));
 	}
 }

@@ -27,15 +27,8 @@ namespace Assets.PlayerBullets
 
 		public void Kill()
 		{
-			if(onKilled!=null)
-				onKilled();
+			onKilled();
 			ObjectPool.Free(gameObject);
-		}
-
-		public override void Initialize()
-		{
-			base.Initialize();
-			Debug.Log("bullet initialized");
 		}
 	}
 }

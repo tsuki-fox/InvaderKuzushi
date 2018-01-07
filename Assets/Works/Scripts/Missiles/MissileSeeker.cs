@@ -83,6 +83,12 @@ namespace Assets.Missiles
 		}
 
 		//! ----overrides----
+
+		public override void Prepare()
+		{
+			base.Prepare();
+			_locked = new List<GameObject>();
+		}
 		public override void Clean()
 		{
 			base.Clean();

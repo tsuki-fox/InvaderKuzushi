@@ -7,51 +7,34 @@ using UniRx;
 
 namespace Assets.Balls
 {
-	public class BallCore : MonoBehaviour, ICore, IKillable
+	public class BallCore : Cores.BaseCore, IKillable
 	{
 		//! ----events----
-		public event OnCleanedHandler onCleaned;
-		public event OnInitializedHandler onInitialized;
-		public event OnReleasedHandler onReleased;
-		public event OnKilledHandler onKilled;
+		public event OnKilledHandler onKilled = delegate { };
+
+		//! ----parameters----
+		[SerializeField]
+		float _damage;
+
+		//! ----properties----
+		public float damage { get { return _damage; } }
 
 		//! ----functions----
-		public void Clean()
+		public override void Clean()
 		{
+			base.Clean();
 			onKilled = delegate { };
-			onCleaned();
 		}
 
-		public void Initialize()
+		public override void Initialize()
 		{
-			Clean();
-			onInitialized();
+			base.Initialize();
 		}
 
 		public void Kill()
 		{
 			onKilled();
 			TF.ObjectPool.Free(gameObject);
-		}
-
-		//! ----life cycles----
-		void Start()
-		{
-			Observable.NextFrame().Subscribe(_ =>
-			{
-				Initialize();
-			});
-		}
-
-		//! ----object pool support----
-		void OnAlloc()
-		{
-			Initialize();
-		}
-
-		void OnFree()
-		{
-			onReleased();
 		}
 	}
 }

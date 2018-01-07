@@ -41,6 +41,21 @@ namespace Assets.Collisions
 			}
 		}
 
+		public sealed class Unsubscriber
+		{
+			Combo _combo;
+			OnCollisionEnterHandler _handler;
+			public Unsubscriber(Combo combo,OnCollisionEnterHandler handler)
+			{
+				_combo = combo;
+				_handler = handler;
+			}
+			public void Unsubscribe()
+			{
+				CollisionBus.Unsubscribe(_combo, _handler);
+			}
+		}
+
 		//! ----delegates----
 		public delegate void OnCollisionEnterHandler(GameObject objA, GameObject objB, Collision2D collision);
 		public delegate void OnNotifiedHandler(GameObject objA, GameObject objB);
@@ -50,12 +65,24 @@ namespace Assets.Collisions
 		static OnNotifiedHandler onNotified = delegate { };
 
 		//! ----functions----
-		public static void Subscribe(Combo combo,OnCollisionEnterHandler handler)
+		public static Unsubscriber Subscribe(Combo combo,OnCollisionEnterHandler handler)
 		{
 			if (_handlers.ContainsKey(combo))
 				_handlers[combo] += handler;
 			else
 				_handlers.Add(combo, handler);
+			return new Unsubscriber(combo, handler);
+		}
+		public static Unsubscriber Subscribe(TagName a,TagName b,OnCollisionEnterHandler handler)
+		{
+			var combo = new Combo(a, b);
+			return Subscribe(combo, handler);
+		}
+
+		public static void Unsubscribe(Combo combo,OnCollisionEnterHandler handler)
+		{
+			if (_handlers.ContainsKey(combo))
+				_handlers[combo] -= handler;
 		}
 
 		public static void Notify(GameObject objA,GameObject objB,Collision2D collision)
@@ -77,6 +104,9 @@ namespace Assets.Collisions
 
 		void Awake()
 		{
+			onNotified = delegate { };
+			_handlers = new Dictionary<Combo, OnCollisionEnterHandler>();
+
 			onNotified += (objA, objB) =>
 			{
 				var logger = GetComponent<Cores.Logger>();

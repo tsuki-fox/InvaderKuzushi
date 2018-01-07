@@ -38,7 +38,7 @@ namespace Assets.Players
 			get { return _powerLevel; }
 			set
 			{
-				int nextLevel = Mathf.Clamp(value, 1, _maxPowerLevel);
+				int nextLevel = Mathf.Clamp(value, 0, _maxPowerLevel);
 				int diff = nextLevel - _powerLevel;
 
 				if (diff != 0)
@@ -55,12 +55,21 @@ namespace Assets.Players
 		//! --------functions--------
 		void TryShot()
 		{
+			/*
 			if (_powerLevel == _maxPowerLevel)
 			{
 				var missile = ObjectPool.Alloc(_sourceMissile);
 				missile.transform.position = transform.position + _missileOffset.ToVector3();
 
 				_powerLevel = 0;
+				onShot();
+			}
+			*/
+			if(_powerLevel>0)
+			{
+				var missile = ObjectPool.Alloc(_sourceMissile);
+				missile.transform.position = transform.position + _missileOffset.ToVector3();
+				powerLevel--;
 				onShot();
 			}
 		}
@@ -93,7 +102,7 @@ namespace Assets.Players
 		//! --------life cycles--------
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (MyInput.missileShot)
 				TryShot();
 		}
 

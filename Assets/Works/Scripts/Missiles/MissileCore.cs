@@ -9,7 +9,7 @@ namespace Assets.Missiles
 	public class MissileCore : BaseCore, Damages.IKillable
 	{
 		//! ----events----
-		public event OnKilledHandler onKilled;
+		public event OnKilledHandler onKilled = delegate { };
 
 		//! ----parameters----
 		float _damage = 10f;

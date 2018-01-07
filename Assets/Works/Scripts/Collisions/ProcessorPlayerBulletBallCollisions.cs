@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Assets.Collisions
 {
-	public class ProcessorPlayerBulletBallCollisions : MonoBehaviour
+	public class ProcessorPlayerBulletBallCollisions :BaseProcessor
 	{
+		[Header("プレイヤー弾-ボール 衝突処理")]
 		//! ----parameters----
 		[SerializeField]
 		GameObject _effect;

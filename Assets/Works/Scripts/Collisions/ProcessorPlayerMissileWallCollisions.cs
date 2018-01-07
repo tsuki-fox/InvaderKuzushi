@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Assets.Collisions
 {
-	public class ProcessorPlayerMissileWallCollisions : MonoBehaviour
+	public class ProcessorPlayerMissileWallCollisions : BaseProcessor
 	{
+		[Header("ミサイル-壁 衝突処理")]
 		//! ----parameters----
 		[SerializeField]
 		GameObject _vfx;

@@ -109,7 +109,7 @@ public class TextInjector : MonoBehaviour
 			if (arg.v.component != null)
 			{
 				var cmp = arg.v.component;
-				var member = cmp.GetType().GetMember(arg.v.propertyPath, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+				var member = cmp.GetType().GetMember(arg.v.propertyPath, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance| BindingFlags.Static);
 				if (member.Length > 0)
 				{
 					object value = GetValue(member[0], cmp);

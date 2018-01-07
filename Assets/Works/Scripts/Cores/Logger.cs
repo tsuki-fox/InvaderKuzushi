@@ -91,7 +91,7 @@ namespace Assets.Cores
 				var self = target as Logger;
 				bool flip = true;
 
-				_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
+				_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true);
 
 				foreach (var log in self._logs)
 				{

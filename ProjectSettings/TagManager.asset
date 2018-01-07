@@ -10,6 +10,7 @@ TagManager:
   - PlayerBullet
   - LaserFence
   - PlayerMissile
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Enemy
   - PlayerBullet
   - Wall
-  - 
-  - 
+  - EnemyBullet
+  - PlayerMissile
   - 
   - 
   - 

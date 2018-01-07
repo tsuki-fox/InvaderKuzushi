@@ -14,16 +14,12 @@ namespace Assets.Cores
 		public Cores.Logger logger { get { return _logger; } }
 		
 		//! ----functions----
-		public virtual void Prepare() { }
+		public virtual void Prepare()
+		{
+			_logger = GetComponent<Logger>();
+		}
 		public virtual void Initialize() { }
 		public virtual void Clean() { }
 		public virtual void Release() { }
-
-		//! ----life cycles----
-		void Awake()
-		{
-			_logger = GetComponent<Logger>();
-			Prepare();
-		}
 	}
 }

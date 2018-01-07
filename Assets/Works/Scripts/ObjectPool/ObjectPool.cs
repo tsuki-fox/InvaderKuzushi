@@ -130,7 +130,8 @@ namespace TF
 		/// <param name="reserveAmount">確保量</param>
 		public static void Reserve(GameObject prefab, int reserveAmount)
 		{
-			CheckInitialize();
+			if (!CheckInitialize())
+				return;
 
 			if (!_groupRoots.ContainsKey(prefab.name))
 				AddObjectGroup(prefab.name);
@@ -148,7 +149,9 @@ namespace TF
 		/// <returns>インスタンス</returns>
 		public static GameObject Alloc(GameObject prefab)
 		{
-			CheckInitialize();
+			if (!CheckInitialize())
+				return null;
+
 			if (!_reserved.ContainsKey(prefab.name))
 			{
 				Debug.LogWarningFormat("Object not reserved! name:{0}", prefab.name);
@@ -189,6 +192,9 @@ namespace TF
 		/// <param name="instance">解放するインスタンス</param>
 		public static void Free(GameObject instance)
 		{
+			if (!CheckInitialize())
+				return;
+
 			if (!instance.transform.IsChildOf(_poolRoot.transform))
 			{
 				Debug.LogWarningFormat("{0} isn't child of [ObjectPool]. Used [GameObject.Destroy] instead.", instance.name);
@@ -232,9 +238,21 @@ namespace TF
 		{
 			_profiles.Add(new ObjectProfile());
 		}
+
+		void Start()
+		{
+			var objects = FindObjectsOfType<Assets.Cores.BaseCore>();
+			foreach (var obj in objects)
+				obj.BroadcastMessage("OnAlloc", SendMessageOptions.DontRequireReceiver);
+		}
+
 		void OnEnable()
 		{
-			ReserveOnLoad();	
+			Debug.Log("loaded");
+			_groupRoots = new Dictionary<string, GameObject>();
+			_reserved = new Dictionary<string, List<GameObject>>();
+			_poolRoot = null;
+			ReserveOnLoad();
 		}
 
 #if UNITY_EDITOR
@@ -279,7 +297,7 @@ namespace TF
 #endif
 
 		//! --------old--------
-		[System.Obsolete("代わりにReallocationを使用してください,コールバックはOnReallocationが呼ばれます")]
+		[System.Obsolete("代わりにAllocを使用してください,コールバックはOnAllocが呼ばれます")]
 		public static GameObject Borrow(GameObject prefab)
 		{
 			return null;

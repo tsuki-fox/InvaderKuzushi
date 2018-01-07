@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4166167304662838}
   - component: {fileID: 212365844482026100}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114051852559286310}
   - component: {fileID: 114815011015359400}
   - component: {fileID: 114252200535991996}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Missile
   m_TagString: PlayerMissile
   m_Icon: {fileID: 0}

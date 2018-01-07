@@ -68,9 +68,9 @@ public class PlayerController : MonoBehaviour
 	{
 		var velocity = new Vector2();
 
-		if (MyInput.isLeft)
+		if (MyInput.left)
 			velocity.x -= _speed;
-		if (MyInput.isRight)
+		if (MyInput.right)
 			velocity.x += _speed;
 		_rigidbody.velocity = velocity;
 	}

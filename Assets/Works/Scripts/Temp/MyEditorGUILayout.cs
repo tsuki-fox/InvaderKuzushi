@@ -49,7 +49,7 @@ public static class MyEditorGUILayout
 	}
 
 	/// <summary>指定のコンポーネントのフィールドを選択可能なポップアップで表示する</summary>
-	public static void FieldsPopupFromComponent(ref int selectedIndex,ref object selectedField, Component component, Type filterType = null, Type filterAttr = null)
+	public static void FieldsPopupFromComponent(ref int selectedIndex, ref object selectedField, Component component, Type filterType = null, Type filterAttr = null)
 	{
 		if (component == null)
 		{
@@ -60,11 +60,11 @@ public static class MyEditorGUILayout
 		}
 
 		var fields = component.GetType()
-			.GetFields(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance)
+			.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 
 		var props = component.GetType()
-			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 
 		if (filterType != null)
@@ -103,7 +103,7 @@ public static class MyEditorGUILayout
 			selectedField = field.GetValue(component);
 	}
 
-	public static void FieldsPopupFromComponent(ref int selectedIndex,ref string propertyPath,Component component,Type filterType=null,Type filterAttr=null)
+	public static void FieldsPopupFromComponent(ref int selectedIndex, ref string propertyPath, Component component, Type filterType = null, Type filterAttr = null)
 	{
 		if (component == null)
 		{
@@ -114,11 +114,11 @@ public static class MyEditorGUILayout
 		}
 
 		var fields = component.GetType()
-			.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+			.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 
 		var props = component.GetType()
-			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 
 		if (filterType != null)
@@ -166,10 +166,10 @@ public static class MyEditorGUILayout
 		}
 
 		var fields = component.GetType()
-			.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+			.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 		var props = component.GetType()
-			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+			.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
 			.ToArray();
 
 		var types = fields

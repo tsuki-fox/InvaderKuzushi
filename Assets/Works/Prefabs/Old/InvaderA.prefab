@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61604343509304270}
   m_Layer: 10
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,9 +38,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4188240875863082}
   - component: {fileID: 50289564172358106}
-  - component: {fileID: 114076073528417700}
-  - component: {fileID: 114199726491420730}
-  - component: {fileID: 114203294850341018}
+  - component: {fileID: 114293230145714080}
+  - component: {fileID: 114586717594512294}
+  - component: {fileID: 114160990024047346}
+  - component: {fileID: 114448427444059108}
+  - component: {fileID: 114882097028569140}
+  - component: {fileID: 114816884308550900}
   m_Layer: 10
   m_Name: InvaderA
   m_TagString: Enemy
@@ -54,7 +57,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1528469906346418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -94,7 +97,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61604343509304270
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -137,7 +140,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114076073528417700
+--- !u!114 &114160990024047346
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -145,13 +148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528469906346418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5148082e07dea943b11e09410254100, type: 3}
+  m_Script: {fileID: 11500000, guid: ee6422caf294f0f4fbd9739df521d9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _straddleEnabled: 0
-  _objectPoolSupport: 1
---- !u!114 &114199726491420730
+  _deadVFX: {fileID: 1569475101358460, guid: de8fedb285e76014cb52d87e84c45dbc, type: 2}
+--- !u!114 &114293230145714080
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -159,14 +160,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528469906346418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b7bf1384889c2f4a88b0d8f46b7890e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a3d63d07b5ad534faf475224f447b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enter: 08000000
-  _stay: 
-  _exit: 
-  _freeNotifiable: 1
---- !u!114 &114203294850341018
+  _maxHP: 10
+--- !u!114 &114448427444059108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -174,12 +172,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528469906346418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca281602453aaa14c935d48427f7e3fe, type: 3}
+  m_Script: {fileID: 11500000, guid: b9d97912c3f27f34493832f905eb28e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deadSE: {fileID: 8300000, guid: f91abed3a538a2a4dbc1675a85313ceb, type: 3}
+--- !u!114 &114586717594512294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528469906346418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af048c6b0e124e4bb4a7eb3dd9175ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTick: 0.2
-  _moveStepX: 0.2
-  _moveStepY: -0.2
+  _moveStep: {x: 0.2, y: -0.2}
+--- !u!114 &114816884308550900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528469906346418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea9b5004f512314facc578557494d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 1000
+--- !u!114 &114882097028569140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528469906346418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec856ec51b0c7a41a52144597624594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212291483538323396
 SpriteRenderer:
   m_ObjectHideFlags: 1

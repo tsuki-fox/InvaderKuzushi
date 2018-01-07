@@ -18,10 +18,21 @@ namespace Assets.Enemies
 		BoxCollider2D _collider;
 		bool _isRight = true;
 		IDisposable _disposer;
+		bool _locked = false;
+
+		//! ----properties----
+		public bool locked
+		{
+			get { return _locked; }
+			set { _locked = value; }
+		}
 
 		//! ----functions----
 		void Move()
 		{
+			if (locked)
+				return;
+
 			float step = _isRight ? _moveStep.x : -_moveStep.x;
 			Vector2 center = _collider.transform.position.ToVector2() + _collider.offset;
 			Vector2 size = _collider.bounds.size;
@@ -40,18 +51,18 @@ namespace Assets.Enemies
 		public override void Initialize()
 		{
 			base.Initialize();
-			core.onInitialized += () =>
+			_isRight = false;
+			_collider = GetComponentInChildren<BoxCollider2D>();
+			_disposer = Observable.Interval(TimeSpan.FromSeconds(_moveTick)).Subscribe(_ =>
 			{
-				_collider = GetComponentInChildren<BoxCollider2D>();
-				_disposer = Observable.Interval(TimeSpan.FromSeconds(_moveTick)).Subscribe(_ =>
-				{
-					Move();
-				}).AddTo(gameObject);
-			};
-			core.onReleased += () =>
-			{
-				_disposer.Dispose();
-			};
+				Move();
+			}).AddTo(gameObject);
+		}
+
+		public override void Release()
+		{
+			base.Release();
+			_disposer.Dispose();
 		}
 	}
 }

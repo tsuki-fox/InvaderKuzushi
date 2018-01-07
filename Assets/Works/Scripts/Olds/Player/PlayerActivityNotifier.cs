@@ -13,8 +13,8 @@ public class PlayerActivityNotifier : MonoBehaviour
 
 	void NotifyMove()
 	{
-		bool left = MyInput.isLeft;
-		bool right = MyInput.isRight;
+		bool left = MyInput.left;
+		bool right = MyInput.right;
 
 		if (left && right)
 			PlayerActivityBus.NotifyMove(gameObject, PlayerActivityBus.Direction.Both);

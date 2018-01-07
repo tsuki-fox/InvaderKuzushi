@@ -38,9 +38,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4510837921617044}
   - component: {fileID: 50892561292317402}
-  - component: {fileID: 114850921341854134}
-  - component: {fileID: 114703898645197196}
-  - component: {fileID: 114587894828910186}
+  - component: {fileID: 114849884084206656}
+  - component: {fileID: 114190254475525306}
+  - component: {fileID: 114322775596627180}
+  - component: {fileID: 114532046606898124}
+  - component: {fileID: 114011682759277534}
+  - component: {fileID: 114211056277948564}
   m_Layer: 10
   m_Name: InvaderB
   m_TagString: Enemy
@@ -137,7 +140,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114587894828910186
+--- !u!114 &114011682759277534
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -145,13 +148,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 1614661032513526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca281602453aaa14c935d48427f7e3fe, type: 3}
+  m_Script: {fileID: 11500000, guid: cea9b5004f512314facc578557494d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 1500
+--- !u!114 &114190254475525306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3d63d07b5ad534faf475224f447b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 10
+--- !u!114 &114211056277948564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6422caf294f0f4fbd9739df521d9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deadVFX: {fileID: 1569475101358460, guid: de8fedb285e76014cb52d87e84c45dbc, type: 2}
+--- !u!114 &114322775596627180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ecc4dee4ed56846a830b2b2a46c650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interval: 3
+  _bulletPrefab: {fileID: 1328853083286024, guid: b3a9719b0015a5c41a0d6381e8b7786e,
+    type: 2}
+  _shotVelocity: 3
+--- !u!114 &114532046606898124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614661032513526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af048c6b0e124e4bb4a7eb3dd9175ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTick: 0.2
-  _moveStepX: 0.2
-  _moveStepY: -0.2
---- !u!114 &114703898645197196
+  _moveStep: {x: 0.2, y: 0.2}
+--- !u!114 &114849884084206656
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -159,27 +212,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1614661032513526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b7bf1384889c2f4a88b0d8f46b7890e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ec856ec51b0c7a41a52144597624594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enter: 08000000
-  _stay: 
-  _exit: 
-  _freeNotifiable: 1
---- !u!114 &114850921341854134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1614661032513526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5148082e07dea943b11e09410254100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _straddleEnabled: 0
-  _objectPoolSupport: 1
 --- !u!212 &212113085105349518
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -26,7 +26,6 @@ namespace Assets.Players
 			{
 				var bullet = ObjectPool.Alloc(_bulletSource);
 				bullet.transform.position = transform.position;
-				var bulletCore = bullet.GetComponent<PlayerBullets.PlayerBulletCore>();
 				var bulletBody = bullet.GetComponent<Rigidbody2D>();
 				bulletBody.velocity = new Vector2(0f, _shotVelocity);
 				onShot();

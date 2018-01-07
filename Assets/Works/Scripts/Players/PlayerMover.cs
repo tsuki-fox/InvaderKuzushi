@@ -14,9 +14,9 @@ namespace Assets.Players
 		void Move()
 		{
 			Vector2 velocity = new Vector2();
-			if (MyInput.isLeft)
+			if (MyInput.left)
 				velocity.x = -_moveSpeed;
-			if (MyInput.isRight)
+			if (MyInput.right)
 				velocity.x = _moveSpeed;
 			rigidbody2D.velocity = velocity;
 		}

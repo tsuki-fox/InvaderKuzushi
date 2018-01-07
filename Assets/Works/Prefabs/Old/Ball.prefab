@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58538437600002054}
   m_Layer: 9
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4646598218978258}
   - component: {fileID: 50190540189383954}
-  - component: {fileID: 114642801104079656}
+  - component: {fileID: 114699895842607680}
+  - component: {fileID: 114467555817979574}
+  - component: {fileID: 114020207671437908}
+  - component: {fileID: 114453268018073954}
   m_Layer: 9
   m_Name: Ball
   m_TagString: Ball
@@ -125,7 +128,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114642801104079656
+--- !u!114 &114020207671437908
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -133,13 +136,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988928867590536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09260bcad6e86ac4392537566e7068d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 464958b8b41cd6742a9f1f1e7a50b133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
-  _speedLimitMin: 5
-  _speedLimitMax: 5
-  _power: {x: 4, y: 4}
+--- !u!114 &114453268018073954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988928867590536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae76cbbd7ebfa48830797181ffa723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114467555817979574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988928867590536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88404d7e60d217847846af90903eab42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedLimitMin: 7
+  _speedLimitMax: 7
+--- !u!114 &114699895842607680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988928867590536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0337cff466925a44189698d930f54f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
 --- !u!212 &212887104355828070
 SpriteRenderer:
   m_ObjectHideFlags: 1

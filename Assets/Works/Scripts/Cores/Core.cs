@@ -35,14 +35,22 @@ namespace Assets.Cores
 
 		//! ----functions----
 		public virtual void Prepare() { }
-		public virtual void Initialize() { }
-		public virtual void Clean() { }
+		public virtual void Initialize(){}
+		public virtual void Clean()
+		{
+			onInitialized = delegate { };
+			onReleased = delegate { };
+		}
+		public virtual void Release() { }
 
 		//! ----life cycles----
 		protected virtual void Awake()
 		{
 			_logger = GetComponent<Logger>();
 			Prepare();
+			var components = GetComponents<BaseComponent>();
+			foreach (var component in components)
+				component.Prepare();
 		}
 
 		protected virtual void OnDestroy()
@@ -53,12 +61,7 @@ namespace Assets.Cores
 		//! ----object pool support----
 		void OnAlloc()
 		{
-			Debug.Log("OnAllocated");
 			var components = GetComponents<BaseComponent>();
-			foreach (var component in components)
-				component.Clean();
-			Clean();
-
 			Initialize();
 			foreach (var component in components)
 				component.Initialize();
@@ -70,7 +73,12 @@ namespace Assets.Cores
 			var components = GetComponents<BaseComponent>();
 			foreach (var component in components)
 				component.Release();
+			Release();
 			onReleased();
+
+			foreach (var component in components)
+				component.Clean();
+			Clean();
 		}
 	}
 }

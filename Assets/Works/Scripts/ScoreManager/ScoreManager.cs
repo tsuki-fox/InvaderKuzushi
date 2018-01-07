@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using Assets.Managers;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,11 +12,25 @@ public class ScoreManager : MonoBehaviour
 {
 	static ScoreManager _self = null;
 
-	float _rawScore;
 	[Extractable]
-	float _displayedScore;
+	static float _topScore = 0f;
+
+	static float _rawScore;
+	[Extractable]
+	static float _displayedScore;
 	[SerializeField]
 	float _completeTime = 0.5f;
+
+	static Tweener _tweener;
+
+	[Extractable]
+	public float buffer
+	{
+		get
+		{
+			return _rawScore - _displayedScore;
+		}
+	}
 
 	void Awake()
 	{
@@ -23,13 +38,59 @@ public class ScoreManager : MonoBehaviour
 			_self = this;
 	}
 
+	void Start()
+	{
+		SceneConductor.onPlaySceneStart += () =>
+		{
+			_rawScore = 0f;
+			_displayedScore = 0f;
+		};
+		SceneConductor.onPlaySceneEnd += () =>
+		{
+			if (_topScore < _rawScore)
+				_topScore = _rawScore;
+		};
+		SceneConductor.onResultSceneStart += () =>
+		{
+			Reanimation();
+		};
+	}
+
+	void OnDestroy()
+	{
+		if(_tweener!=null)
+			_tweener.Complete();
+	}
+
+	static void Initialize()
+	{
+		if (_self == null)
+			_self = FindObjectOfType<ScoreManager>();
+	}
+	static bool CheckInitialize()
+	{
+		Initialize();
+		return _self == null ? false : true;
+	}
+
 	public static void AddScore(float value)
 	{
-		_self._rawScore += value;
-		DOTween.To(
-			() => _self._displayedScore,
-			num => _self._displayedScore = num,
-			_self._rawScore,
+		CheckInitialize();
+		_rawScore += value;
+		_tweener=DOTween.To(
+			() => _displayedScore,
+			num => _displayedScore = num,
+			_rawScore,
+			_self._completeTime);
+	}
+
+	public static void Reanimation()
+	{
+		_displayedScore = 0;
+		_tweener = DOTween.To(
+			() => _displayedScore,
+			num => _displayedScore = num,
+			_rawScore,
 			_self._completeTime);
 	}
 
@@ -39,12 +100,12 @@ public class ScoreManager : MonoBehaviour
 	{
 		public override void OnInspectorGUI()
 		{
-			var self = target as ScoreManager;
-
 			if(GUILayout.Button("AddScore"))
 			{
 				ScoreManager.AddScore(1000);
 			}
+			if (GUILayout.Button("Re"))
+				Reanimation();
 		}
 	}
 #endif
